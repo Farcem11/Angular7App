@@ -1,11 +1,15 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
+import { Subject } from 'rxjs';
+import { StoreDataService } from './store-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
+
+  onRecipesChanges: Subject<Recipe[]> = new Subject();
 
   constructor() { }
 
@@ -36,7 +40,27 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipe(index: string) {
-    return this.recipes[+index];
+  getRecipe(index: number) {
+    return this.recipes.slice()[index];
   }
+
+  addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.onRecipesChanges.next(this.recipes.slice());
+  }
+
+  updateRecipe(recipeIndex: number, recipe: Recipe) {
+    this.recipes[recipeIndex] = recipe;
+    this.onRecipesChanges.next(this.recipes.slice());
+  }
+
+  deleteRecipe(recipeIndex: number) {
+    this.recipes.splice(recipeIndex, 1);
+    this.onRecipesChanges.next(this.recipes.slice());
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.onRecipesChanges.next(this.recipes.slice());
+	}
 }

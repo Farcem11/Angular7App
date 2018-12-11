@@ -5,10 +5,12 @@
         <hr>
         <ul class="list-group">
             <a 
-                class="list-group-item" 
+                class="list-group-item vertical-align" 
                 style="cursor: pointer;"
-                *ngFor="let ingredient of ingredients">
-                {{ingredient.name}} ({{ingredient.amount}})
+                *ngFor="let ingredient of ingredients; let i = index;"
+                (click)="onEditIngredient(i)">
+                    {{ingredient.name}} ({{ingredient.amount}})
+                    <button (click)="deleteIngredient($event, i)" class="btn btn-danger" type="button">Delete</button>
             </a>
         </ul>
     </div>

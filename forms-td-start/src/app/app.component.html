@@ -1,0 +1,144 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div 
+          id="user-data" 
+          ngModelGroup="userData"
+          #userData="ngModelGroup">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input 
+              type="text" 
+              id="username" 
+              class="form-control"
+              ngModel
+              name="userName"
+              required
+              #userName="ngModel">
+          </div>
+          <span class="help-block" *ngIf="userName.invalid && userName.touched">Please enter a valid username.</span>
+          <button 
+            class="btn btn-default" 
+            type="button"
+            (click)="suggestUserName()">Suggest an Username
+          </button>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input 
+              type="email" 
+              id="email" 
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel">
+          </div>
+          <span class="help-block" *ngIf="email.invalid && email.touched">Please enter a valid email.</span>
+        </div>
+        <span class="help-block" *ngIf="userData.invalid && userData.touched">Please enter valid user data.</span>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select 
+            id="secret" 
+            class="form-control"
+            ngModel
+            name="secret"
+            [ngModel]="defaultOption">
+            <option value="pet">Your first Pet?</option>
+            <option value="teacher">Your first teacher?</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea 
+            name="answer" 
+            rows="3"
+            class="form-control"
+            [(ngModel)]="answer">
+          </textarea>
+        </div>
+        <p>Your reply: {{ answer }}</p>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input 
+              type="radio"
+              name="gender"
+              ngModel
+              [value]="gender"
+              required>
+              {{ gender }}
+          </label>
+        </div>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="form.invalid">
+          Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12" *ngIf="submitted">
+    <h3>Your Data</h3>
+    <p>User Name: {{ user.UserName }}</p>
+    <p>Email: {{ user.Email }}</p>
+    <p>Secret Question: {{ user.SecretQuestion }} </p>
+    <p>Answer: {{ user.Answer }}</p>
+    <p>Gender: {{ user.Gender }}</p>
+  </div>
+</div> -->
+
+
+
+
+<span class="help-block" *ngIf="formSignUp.invalid && formSignUp.touched">Please enter valid data.</span>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="ngSignSubmit()" #formSignUp="ngForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            name="email"
+            required
+            email
+            class="form-control"
+            ngModel
+            #email="ngModel">
+        </div>
+        <span class="help-block" *ngIf="email.invalid && email.touched">Please enter valid email.</span>
+        <div class="form-group">
+          <label>Subscription</label>
+          <select 
+            name="subscription"
+            ngModel
+            [ngModel]="'advanced'"
+            class="form-control">
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input 
+              type="password" 
+              name="password" 
+              class="form-control"
+              required
+              ngModel
+              #password="ngModel">
+        </div>
+        <span class="help-block" *ngIf="password.invalid && password.touched">Please enter a password.</span>
+        <button [disabled]="formSignUp.invalid" class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr>
