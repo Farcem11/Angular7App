@@ -2,8 +2,7 @@ import { Injectable, } from '@angular/core';
 import { RecipeService } from './recipe.service';
 import { map } from 'rxjs/operators';
 import { Recipe } from '../models/recipe.model';
-import { AuthService } from './auth.service';
-import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,8 +13,7 @@ export class StoreDataService {
 	private recipesPath : string = 'recipes.json';
 
 	constructor(private httpClient: HttpClient,
-				private recipeService: RecipeService,
-				private authService: AuthService) { }
+				private recipeService: RecipeService) { }
 	
 	saveRecipes() {
 		// this.httpClient.put(this.url + this.recipesPath, this.recipeService.getRecipes(),

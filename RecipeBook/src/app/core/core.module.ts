@@ -20,7 +20,7 @@ import { LoggingnInterceptor } from '../shared/logging.interceptor';
   ],
   exports: [
     AppRoutingModule,
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

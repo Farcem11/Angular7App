@@ -1,13 +1,12 @@
 <div class="row">
     <div class="col-xs-10">
-        <app-shopping-edit>
-        </app-shopping-edit>
+        <app-shopping-edit></app-shopping-edit>
         <hr>
         <ul class="list-group">
             <a 
                 class="list-group-item vertical-align" 
                 style="cursor: pointer;"
-                *ngFor="let ingredient of ingredients; let i = index;"
+                *ngFor="let ingredient of (shoppingListState | async).ingredients; let i = index;"
                 (click)="onEditIngredient(i)">
                     {{ingredient.name}} ({{ingredient.amount}})
                     <button (click)="deleteIngredient($event, i)" class="btn btn-danger" type="button">Delete</button>

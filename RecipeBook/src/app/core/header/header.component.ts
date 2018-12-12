@@ -1,6 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { StoreDataService } from "src/app/services/store-data.service";
-import { AuthService } from "src/app/services/auth.service";
+import { Store } from "@ngrx/store";
+import * as fromApp from "src/app/store/app.reducers";
+import { Observable } from "rxjs";
+import * as fromAuth from "src/app/auth/store/auth.reducers";
+import * as firebase from "firebase";
+import * as AuthActions from '../../auth/store/auth.actions';
 
 @Component({
     selector: 'app-header',
@@ -8,10 +13,16 @@ import { AuthService } from "src/app/services/auth.service";
     styleUrls: ['./header.component.sass']
 })
 
-export class HeaderComponent {
-    
+export class HeaderComponent implements OnInit {
+
+    authState: Observable<fromAuth.State>;
+
     constructor(private storeDataService: StoreDataService,
-                private authService: AuthService) {}
+                private store: Store<fromApp.AppState>) {}
+
+    ngOnInit() {
+        this.authState = this.store.select('auth');
+    }
 
     saveData() {
         this.storeDataService.saveRecipes();
@@ -21,11 +32,14 @@ export class HeaderComponent {
         this.storeDataService.loadRecipes();
     }
 
-    logOut() {
-        this.authService.logOut();
-    }
-
-    isAuthenticated() {
-        return this.authService.isAuthenticated();
+    async logOut() {
+        try {
+            const response = await firebase.auth().signOut();
+            console.log(response);            
+            this.store.dispatch(new AuthActions.Logout());
+        }
+        catch(error) {
+          console.log(error);      
+        }
     }
 }

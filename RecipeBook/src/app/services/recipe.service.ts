@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
 import { Subject } from 'rxjs';
-import { StoreDataService } from './store-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,5 +61,5 @@ export class RecipeService {
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
     this.onRecipesChanges.next(this.recipes.slice());
-	}
+  }
 }
