@@ -7,11 +7,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
     trigger('divState', [
       state('normal', style({
-        'background-color': 'red',
+        backgroundColor: 'red',
         transform: 'translateX(0)'
       })),
       state('hightlighted', style({
-        'background-color': 'blue',
+        backgroundColor: 'blue',
         transform: 'translateX(100px)'
       })),
       transition('normal <=> hightlighted', animate(300))
@@ -19,23 +19,32 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
     trigger('wildState', [
       state('normal', style({
-        'background-color': 'red',
+        backgroundColor: 'red',
         transform: 'translateX(0) scale(1)'
       })),
       state('hightlighted', style({
-        'background-color': 'blue',
+        backgroundColor: 'blue',
         transform: 'translateX(100px) scale(1)'
       })),
       state('shrunken', style({
-        'background-color': 'green',
-        transform: 'translateX(0) scale(0.5)'
+        backgroundColor: 'green',
+        borderRadius: '50px'
       })),
       transition('normal => hightlighted', animate(300)),
       transition('hightlighted => normal', animate(800)),
-      transition('shrunken <=> *', animate(500))
+      transition('shrunken <=> *', [
+        animate(1000, style({
+          backgroundColor: 'orange'
+        })),
+        animate(1000, style({
+          transform: 'scale(0.5)',
+        })),
+        animate(1000)
+      ])
     ])  
   ]
 })
+
 export class AppComponent {
   state = 'normal';
   wildState = 'normal';
