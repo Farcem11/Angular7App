@@ -9,13 +9,19 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesRoutingModule } from './recipes-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { recipesReducer } from './store/recipes.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { RecipesEffects } from './store/recipes.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
-    SharedModule
+    SharedModule,
+    StoreModule.forFeature('recipes', recipesReducer),
+    EffectsModule.forFeature([RecipesEffects])
   ],
   declarations: [
     RecipesComponent,

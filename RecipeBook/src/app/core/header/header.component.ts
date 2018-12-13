@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { StoreDataService } from "src/app/services/store-data.service";
 import { Store } from "@ngrx/store";
 import * as fromApp from "src/app/store/app.reducers";
 import { Observable } from "rxjs";
-import * as fromAuth from "src/app/auth/store/auth.reducers";
-import * as firebase from "firebase";
+import * as fromAuth from "../../auth/store/auth.reducers";
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as RecipesActions from '../../recipes/store/recipes.actions';
+import * as firebase from "firebase";
 
 @Component({
     selector: 'app-header',
@@ -17,19 +17,18 @@ export class HeaderComponent implements OnInit {
 
     authState: Observable<fromAuth.State>;
 
-    constructor(private storeDataService: StoreDataService,
-                private store: Store<fromApp.AppState>) {}
+    constructor(private store: Store<fromApp.AppState>) {}
 
     ngOnInit() {
         this.authState = this.store.select('auth');
     }
 
     saveData() {
-        this.storeDataService.saveRecipes();
+        this.store.dispatch(new RecipesActions.StoreRecipes());
     }
 
     fetchData() {
-        this.storeDataService.loadRecipes();
+        this.store.dispatch(new RecipesActions.FetchRecipes());
     }
 
     async logOut() {
